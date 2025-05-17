@@ -14,10 +14,6 @@ resources:
 - grafana-deployment.yaml
 - grafana-service.yaml
 images:
-- name: <DOCKERHUB_USER>/api
-  newTag: latest
-- name: <DOCKERHUB_USER>/locust
-  newTag: latest
 - name: camidzn/api
   newTag: 20250517-7
 - name: camidzn/locust
