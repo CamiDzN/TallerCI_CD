@@ -1,20 +1,24 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-  - api-deployment.yaml
-  - api-service.yaml
-  - fastapi-deployment.yaml
-  - fastapi-service.yaml
-  - locust-k8s.yaml
-  - namespace-observability.yaml
-  - prometheus-configmap.yaml
-  - prometheus-deployment.yaml
-  - prometheus-service.yaml
-  - grafana-datasources.yaml
-  - grafana-deployment.yaml
-  - grafana-service.yaml
+- api-deployment.yaml
+- api-service.yaml
+- fastapi-deployment.yaml
+- fastapi-service.yaml
+- locust-k8s.yaml
+- namespace-observability.yaml
+- prometheus-configmap.yaml
+- prometheus-deployment.yaml
+- prometheus-service.yaml
+- grafana-datasources.yaml
+- grafana-deployment.yaml
+- grafana-service.yaml
 images:
-  - name: <DOCKERHUB_USER>/api
-    newTag: latest
-  - name: <DOCKERHUB_USER>/locust
-    newTag: latest
+- name: <DOCKERHUB_USER>/api
+  newTag: latest
+- name: <DOCKERHUB_USER>/locust
+  newTag: latest
+- name: camidzn/api
+  newTag: latest
+- name: camidzn/locust
+  newTag: latest
