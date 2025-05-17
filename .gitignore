@@ -1,0 +1,9 @@
+# Ignorar el modelo entrenado en CI
+/API/app/model.pkl
+
+# Ignorar archivos de entorno de Python
+__pycache__/
+*.py[cod]
+
+# Ignorar archivos de logs
+*.log
