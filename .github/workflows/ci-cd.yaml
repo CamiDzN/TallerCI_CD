@@ -25,9 +25,9 @@ jobs:
           python-version: 3.9
 
       - name: Entrenar modelo
-        # Entrenamos el modelo dentro de la carpeta api
+        # Entrenamos el modelo dentro de la carpeta API
         run: |
-          cd api
+          cd API
           pip install -r requirements.txt scikit-learn joblib
           python train_model.py
 
@@ -40,7 +40,7 @@ jobs:
       - name: Build y push API
         uses: docker/build-push-action@v4
         with:
-          context: api
+          context: API
           push: true
           tags: ${{ env.REPO_API }}:latest
 
