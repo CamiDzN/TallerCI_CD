@@ -1,0 +1,65 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'API/**'
+      - 'locust/**'     # Trigger automático en commits a main de las carpetas API locust
+  workflow_dispatch:       # Trigger manual desde la UI
+
+env:
+  REGISTRY: docker.io
+  REPO_API: ${{ secrets.DOCKERHUB_USER }}/api
+  REPO_LOCUST: ${{ secrets.DOCKERHUB_USER }}/locust
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.9
+
+      - name: Entrenar modelo
+        working-directory: api
+        run: |
+          pip install -r requirements.txt scikit-learn joblib
+          python train_model.py
+
+      - name: Login en DockerHub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USER }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build y push API
+        uses: docker/build-push-action@v4
+        with:
+          context: api
+          push: true
+          tags: ${{ env.REPO_API }}:latest
+
+      - name: Build y push Locust
+        uses: docker/build-push-action@v4
+        with:
+          context: locust
+          push: true
+          tags: ${{ env.REPO_LOCUST }}:latest
+
+      - name: Actualizar kustomization
+        run: |
+          cd manifests
+          kustomize edit set image ${{ env.REPO_API }}:latest
+          kustomize edit set image ${{ env.REPO_LOCUST }}:latest
+
+      - name: Commit cambios de manifest
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git add manifests/kustomization.yaml
+          git commit -m "chore: actualizar imágenes a latest"
+          git push
