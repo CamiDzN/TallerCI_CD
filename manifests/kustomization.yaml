@@ -19,6 +19,6 @@ images:
 - name: <DOCKERHUB_USER>/locust
   newTag: latest
 - name: camidzn/api
-  newTag: latest
+  newTag: 20250517-7
 - name: camidzn/locust
-  newTag: latest
+  newTag: 20250517-7
