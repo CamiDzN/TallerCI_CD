@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
         - name: locust-master
-          image: <DOCKERHUB_USER>/locust:latest
+          image: camidzn/locust:latest
           args:
             - "-f"
             - "locustfile.py"

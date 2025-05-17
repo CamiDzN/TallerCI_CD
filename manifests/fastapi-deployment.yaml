@@ -15,6 +15,6 @@ spec:
     spec:
       containers:
       - name: fastapi
-        image: <DOCKERHUB_USER>/api:latest
+        image: camidzn/api:latest
         ports:
         - containerPort: 8000
