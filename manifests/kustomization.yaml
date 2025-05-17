@@ -15,6 +15,6 @@ resources:
 - grafana-service.yaml
 images:
 - name: camidzn/api
-  newTag: 20250517-7
+  newTag: 20250517-8
 - name: camidzn/locust
-  newTag: 20250517-7
+  newTag: 20250517-8
