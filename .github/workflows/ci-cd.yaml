@@ -25,10 +25,10 @@ jobs:
           python-version: 3.9
 
       - name: Entrenar modelo
-        # Entrenamos el modelo dentro de la carpeta API
+        # Entrenamos el modelo dentro de la carpeta API e instalamos dependencias
         run: |
           cd API
-          pip install -r requirements.txt scikit-learn joblib
+          pip install --no-cache-dir -r requirements.txt
           python train_model.py
 
       - name: Login en DockerHub
