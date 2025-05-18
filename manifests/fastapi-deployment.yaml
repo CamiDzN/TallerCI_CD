@@ -15,6 +15,6 @@ spec:
     spec:
       containers:
         - name: fastapi
-          image: localhost:32000/fastapi-service:latest
+          image: camidzn/api:latest
           ports:
             - containerPort: 8000

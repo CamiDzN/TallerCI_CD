@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
         - name: locust-master
-          image: localhost:32000/locust:latest
+          image: camidzn/locust:latest
           args:
             - "-f"
             - "locustfile.py"
@@ -75,7 +75,7 @@ spec:
     spec:
       containers:
         - name: locust-worker
-          image: localhost:32000/locust:latest
+          image: camidzn/locust:latest
           args:
             - "-f"
             - "locustfile.py"
