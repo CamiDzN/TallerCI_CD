@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grafana-dashboards
+  namespace: observability
+data:
+  # El nombre aquí será el nombre de archivo dentro del contenedor
+  my-dashboard.json: |-
+    {
+      "__inputs": [],
+      "__requires": [],
+      "annotations": { "list": [] },
+      "panels": [ 
+        // ... pega aquí TODO el JSON exportado de tu dashboard ...
+      ],
+      "title": "Mi Dashboard Inicial",
+      "uid": "mi-dashboard-inicial",
+      "version": 1
+    }
