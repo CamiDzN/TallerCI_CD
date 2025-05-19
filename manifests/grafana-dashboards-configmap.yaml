@@ -11,7 +11,103 @@ data:
       "__requires": [],
       "annotations": { "list": [] },
       "panels": [ 
-        // ... pega aquí TODO el JSON exportado de tu dashboard ...
+       {
+    "id": 3,
+    "type": "timeseries",
+    "title": "Predicciones realizadas",
+    "gridPos": {
+      "x": 0,
+      "y": 0,
+      "h": 8,
+      "w": 12
+    },
+    "fieldConfig": {
+      "defaults": {
+        "custom": {
+          "drawStyle": "line",
+          "lineInterpolation": "linear",
+          "barAlignment": 0,
+          "barWidthFactor": 0.6,
+          "lineWidth": 1,
+          "fillOpacity": 0,
+          "gradientMode": "none",
+          "spanNulls": false,
+          "insertNulls": false,
+          "showPoints": "auto",
+          "pointSize": 5,
+          "stacking": {
+            "mode": "none",
+            "group": "A"
+          },
+          "axisPlacement": "auto",
+          "axisLabel": "",
+          "axisColorMode": "text",
+          "axisBorderShow": false,
+          "scaleDistribution": {
+            "type": "linear"
+          },
+          "axisCenteredZero": false,
+          "hideFrom": {
+            "tooltip": false,
+            "viz": false,
+            "legend": false
+          },
+          "thresholdsStyle": {
+            "mode": "off"
+          }
+        },
+        "color": {
+          "mode": "palette-classic"
+        },
+        "mappings": [],
+        "thresholds": {
+          "mode": "absolute",
+          "steps": [
+            {
+              "value": null,
+              "color": "green"
+            },
+            {
+              "value": 80,
+              "color": "red"
+            }
+          ]
+        }
+      },
+      "overrides": []
+    },
+    "pluginVersion": "12.0.0",
+    "targets": [
+      {
+        "refId": "A",
+        "editorMode": "builder",
+        "expr": "inference_requests_total",
+        "legendFormat": "__auto",
+        "range": true,
+        "useBackend": false,
+        "disableTextWrap": false,
+        "fullMetaSearch": false,
+        "includeNullMetadata": true
+      }
+    ],
+    "datasource": {
+      "uid": "PBFA97CFB590B2093",
+      "type": "prometheus"
+    },
+    "options": {
+      "tooltip": {
+        "mode": "single",
+        "sort": "none",
+        "hideZeros": false
+      },
+      "legend": {
+        "showLegend": true,
+        "displayMode": "list",
+        "placement": "bottom",
+        "calcs": []
+      }
+    }
+  }
       ],
       "title": "Mi Dashboard Inicial",
       "uid": "mi-dashboard-inicial",
