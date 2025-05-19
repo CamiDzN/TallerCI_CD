@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: ia-api-gitops         # Nombre interno en Argo CD
+  namespace: argocd           # Namespace donde Argo CD está instalado
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/CamiDzN/TallerCI_CD.git
+    targetRevision: main      # Rama a vigilar
+    path: manifests           # Carpeta que contiene tu kustomization.yaml
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default        # Namespace donde se desplegarán los recursos
+  syncPolicy:
+    automated:
+      prune: true             # Borra recursos que quites de Git
+      selfHeal: true          # Re-aplica si detecta drift
