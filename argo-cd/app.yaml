@@ -7,7 +7,7 @@ spec:
   project: default
   source:
     repoURL: https://github.com/CamiDzN/TallerCI_CD
-    targetRevision: DanielR
+    targetRevision: main
     path: manifests
   destination:
     server: https://kubernetes.default.svc
