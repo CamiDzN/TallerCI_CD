@@ -2,9 +2,7 @@ apiVersion: v1
 kind: Namespace
 metadata:
   name: loadtest
-
 ---
-# ===== Master Deployment =====
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -28,27 +26,9 @@ spec:
             - "locustfile.py"
             - "--master"
           ports:
-            - containerPort: 8089   # UI
-            - containerPort: 5557   # RPC (master<->workers)
-
+            - containerPort: 8089
+            - containerPort: 5557
 ---
-# ===== RPC Service para workers =====
-apiVersion: v1
-kind: Service
-metadata:
-  name: locust-master-rpc
-  namespace: loadtest
-spec:
-  type: ClusterIP
-  selector:
-    app: locust-master
-  ports:
-    - name: rpc
-      port: 5557
-      targetPort: 5557
-
----
-# ===== UI Service =====
 apiVersion: v1
 kind: Service
 metadata:
@@ -63,9 +43,21 @@ spec:
       port: 8089
       targetPort: 8089
       nodePort: 30009
-
 ---
-# ===== Workers Deployment =====
+apiVersion: v1
+kind: Service
+metadata:
+  name: locust-master-rpc
+  namespace: loadtest
+spec:
+  type: ClusterIP
+  selector:
+    app: locust-master
+  ports:
+    - name: rpc
+      port: 5557
+      targetPort: 5557
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -83,28 +75,12 @@ spec:
     spec:
       containers:
         - name: locust-worker
-          image: <DOCKERHUB_USER>/locust:latest
+          image: camidzn/locust:latest
           args:
             - "-f"
             - "locustfile.py"
             - "--worker"
             - "--master-host"
-            - "locust-master-rpc.loadtest.svc.cluster.local"  # servicio RPC
+            - "locust-master-rpc.loadtest.svc.cluster.local"
           ports:
-            - containerPort: 5558  # comunicación worker->master
-
----
-# ===== Stats Service (opcional) =====
-apiVersion: v1
-kind: Service
-metadata:
-  name: locust-master-stats
-  namespace: loadtest
-spec:
-  type: ClusterIP
-  selector:
-    app: locust-master
-  ports:
-    - name: stats
-      port: 5557
-      targetPort: 5557
+            - containerPort: 5558

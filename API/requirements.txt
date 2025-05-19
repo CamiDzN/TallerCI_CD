@@ -4,4 +4,4 @@ scikit-learn
 joblib
 prometheus-client
 pandas
-pydantic
+

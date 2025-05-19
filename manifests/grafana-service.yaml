@@ -8,7 +8,7 @@ spec:
   selector:
     app: grafana
   ports:
-  - name: web
-    port: 3000
-    targetPort: 3000
-    nodePort: 30030
+    - name: web
+      port: 3000
+      targetPort: 3000
+      nodePort: 30030
