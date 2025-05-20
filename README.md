@@ -73,14 +73,7 @@ https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
 microk8s kubectl -n argocd get secret argocd-initial-admin-secret \
   -o jsonpath="{.data.password}" | base64 -d && echo
 ```
-
-### 4 . Obtener contraseña de acceso
-
-```bash
-microk8s kubectl -n argocd get secret argocd-initial-admin-secret \
-  -o jsonpath="{.data.password}" | base64 -d && echo
-```
-### 4 . Obtener contraseña de acceso
+###  . Obtener contraseña de acceso
 
 ```bash
 microk8s kubectl apply -f argo-cd/app.yaml -n argocd
