@@ -16,8 +16,8 @@ Este proyecto implementa un flujo de **despliegue continuo (CI/CD)** con enfoque
 
 ---
 ## 📁 Estructura del Proyecto
+```
 TallerCI_CD/
-allerCI_CD/
 ├── API/
 │ ├── app/
 │ │ └── main.py
@@ -45,7 +45,7 @@ allerCI_CD/
 └── .github/
 └── workflows/
 └── ci-cd.yml
-
+```
 ---
 
 ## 🚀 Despliegue Paso a Paso
