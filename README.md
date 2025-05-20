@@ -108,3 +108,57 @@ Estas métricas están habilitadas gracias a la librería `prometheus_client` y 
 
 ```yaml
 manifests/grafana-datasources.yaml
+```
+
+## 🚀 Validación del Despliegue con Argo CD
+
+Después de conectar Argo CD con nuestro repositorio de GitHub mediante `kustomization.yaml`, procedimos a validar que la integración de GitOps funcionaba correctamente con los siguientes pasos:
+
+### 🔐 Conexión a la Interfaz de Argo CD
+
+Desde la terminal ejecutamos:
+
+```bash
+microk8s kubectl port-forward svc/argocd-server -n argocd 8080:443
+```
+Esto nos permitió acceder vía navegador a:
+
+```bash
+https://localhost:8080
+```
+
+### 🧠 Visualización en Argo CD
+En la interfaz de Argo CD pudimos verificar:
+
+- El estado de sincronización ✅ Synced.
+- La salud del sistema 💚 Healthy.
+
+![image](https://github.com/user-attachments/assets/7cfbb328-4e0a-4b7a-b8a5-2a8796c849f3)
+
+- Que los manifiestos provenientes de GitHub estaban correctamente aplicados.
+
+![image](https://github.com/user-attachments/assets/30dd76be-316b-4c75-97da-c5deea7343f6)
+
+- La sección de History and Rollback mostraba el historial de despliegues con las imágenes actualizadas:
+
+![Imagen de WhatsApp 2025-05-19 a las 20 24 12_0e221ad4](https://github.com/user-attachments/assets/7c5c3623-2c3d-4908-825a-9e97fa22b2fa)
+
+![Imagen de WhatsApp 2025-05-19 a las 20 24 46_ef280265](https://github.com/user-attachments/assets/89520d08-2365-4e2a-adef-5d5f71a7a3a5)
+
+
+| Revisión | Imagen FastAPI            | Imagen Locust                |
+| -------- | ------------------------- | ---------------------------- |
+| b23add2  | `camidzn/api:20250518-1`  | `camidzn/locust:20250518-1`  |
+| ad255bf  | `camidzn/api:20250519-10` | `camidzn/locust:20250519-10` |
+
+### 🧪 Validación de Pods Desplegados
+Verificamos los contenedores corriendo con:
+
+```bash
+microk8s kubectl get pods -n loadtest --sort-by=.metadata.creationTimestamp
+```
+
+![Imagen de WhatsApp 2025-05-19 a las 20 26 21_4653d84a](https://github.com/user-attachments/assets/54179989-1561-4caf-b3f5-faec8c1fd070)
+
+✅ Esto confirma que la sincronización de Argo CD no solo actualizó las imágenes automáticamente desde GitHub, sino que también recreó los pods necesarios en el clúster de Kubernetes.
+
