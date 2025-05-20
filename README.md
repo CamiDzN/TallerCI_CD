@@ -126,7 +126,7 @@ En la interfaz de Argo CD pudimos verificar:
 - El estado de sincronización ✅ Synced.
 - La salud del sistema 💚 Healthy.
 
-![image](https://github.com/user-attachments/assets/7cfbb328-4e0a-4b7a-b8a5-2a8796c849f3)
+(https://github.com/user-attachments/assets/7cfbb328-4e0a-4b7a-b8a5-2a8796c849f3)
 
 - Que los manifiestos provenientes de GitHub estaban correctamente aplicados.
 
