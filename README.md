@@ -17,26 +17,33 @@ Este proyecto implementa un flujo de **despliegue continuo (CI/CD)** con enfoque
 ---
 ## 📁 Estructura del Proyecto
 TallerCI_CD/
+allerCI_CD/
 ├── API/
-│ ├── app/main.py
+│ ├── app/
+│ │ └── main.py
 │ ├── train_model.py
 │ ├── Dockerfile
 │ └── requirements.txt
 ├── locust/
-│ ├── locustfile.py
-│ └── Dockerfile
+│ └── locustfile.py
+├── Dockerfile
 ├── manifests/
 │ ├── fastapi-deployment.yaml
 │ ├── fastapi-service.yaml
 │ ├── locust-k8s.yaml
-│ ├── prometheus-.yaml
-│ ├── grafana-.yaml
+│ ├── prometheus-configmap.yaml
+│ ├── prometheus-deployment.yaml
+│ ├── prometheus-service.yaml
+│ ├── grafana-datasources.yaml
+│ ├── grafana-deployment.yaml
+│ ├── grafana-service.yaml
 │ ├── namespace-observability.yaml
 │ └── kustomization.yaml
 ├── argo-cd/
-│ └── app.yaml
-  └── install.yaml
-└── .github/workflows/
+│ ├── app.yaml
+│ └── install.yaml
+└── .github/
+└── workflows/
 └── ci-cd.yml
 
 ---
