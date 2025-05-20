@@ -192,22 +192,31 @@ Para garantizar el correcto funcionamiento del flujo de CI, se realizaron las si
 ### 🔍 1. Trigger Automático al Modificar Requirements
 
 Al realizar un cambio en `API/app/requirements.txt` y hacer push a la rama `main`, el workflow **CI/CD Pipeline** se dispara automáticamente. Esto confirma que los **paths filters** (`API/**` y `locust/**`) están correctamente configurados para iniciar el pipeline solo cuando existen cambios relevantes.
-*(imagen: captura de inicio de workflow con trigger automático)*
+
+![image](https://github.com/user-attachments/assets/fc44a3a3-349f-4504-8aac-8dc55179fa36)
+
 
 ### ✅ 2. Verificación de Ejecución Exitosa
 
 En la consola de GitHub Actions se comprueba que todas las etapas del job `build-and-push` (Checkout, Versionado, Entrenamiento, Build & Push, Actualización de Manifiestos y Commit) finalizan sin errores, mostrando iconos verdes de éxito.
-*(imagen: dashboard de GitHub Actions con jobs completados)*
+
+![image](https://github.com/user-attachments/assets/9b52c419-fa4b-4763-b3e5-127bc2f9de8c)
+
 
 ### 🐳 3. Comprobación de Imágenes en Docker Hub
 
 Accedimos a los repositorios **REPO\_API** y **REPO\_LOCUST** en Docker Hub y validamos la aparición de las nuevas etiquetas con formato `YYYYMMDD-RUN`. Cada imagen contiene el artefacto del modelo entrenado y satisface los requisitos de versionado.
-*(imagen: listado de tags en Docker Hub mostrando el nuevo tag)*
+
+![image](https://github.com/user-attachments/assets/4638dcd2-11de-4d4c-ba80-9f724e3deac4)
+
+![image](https://github.com/user-attachments/assets/2270d14d-f045-43ff-adbd-16a9b20bb718)
+
 
 ### 🔄 4. Confirmación de Actualización en Kustomize
 
 Se revisa el diff en GitHub del commit automático que modificó `manifests/kustomization.yaml`, asegurando que los **image tags** se hayan actualizado correctamente al nuevo `IMAGE_TAG`. Este paso valida que la fase de **Kustomize edit set image** funciona según lo esperado.
-*(imagen: diff en GitHub mostrando la actualización de tags en kustomization.yaml)*
+
+![image](https://github.com/user-attachments/assets/40f03f15-a051-4d43-bff8-e13ae0d7ca39)
 
 
 Después de conectar Argo CD con nuestro repositorio de GitHub mediante `kustomization.yaml`, procedimos a validar que la integración de GitOps funcionaba correctamente con los siguientes pasos:
@@ -259,7 +268,6 @@ microk8s kubectl get pods -n loadtest --sort-by=.metadata.creationTimestamp
 ![Imagen de WhatsApp 2025-05-19 a las 20 26 21_4653d84a](https://github.com/user-attachments/assets/54179989-1561-4caf-b3f5-faec8c1fd070)
 
 ✅ Esto confirma que la sincronización de Argo CD no solo actualizó las imágenes automáticamente desde GitHub, sino que también recreó los pods necesarios en el clúster de Kubernetes.
-
 
 
 ### 🎯 8. Visualización en Grafana
