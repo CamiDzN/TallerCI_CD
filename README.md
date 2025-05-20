@@ -162,3 +162,43 @@ microk8s kubectl get pods -n loadtest --sort-by=.metadata.creationTimestamp
 
 ✅ Esto confirma que la sincronización de Argo CD no solo actualizó las imágenes automáticamente desde GitHub, sino que también recreó los pods necesarios en el clúster de Kubernetes.
 
+## 📈 Observabilidad con Grafana
+
+Este proyecto incluye un dashboard de Grafana que se crea automáticamente al desplegar el clúster.
+
+### 🔧 ¿Cómo se logra?
+
+La configuración se realiza mediante los siguientes manifiestos:
+
+- `grafana-dashboards-configmap.yaml`: contiene el JSON del dashboard (`my-dashboard.json`) con las métricas deseadas.
+- `grafana-dashboard-provider.yaml`: indica a Grafana dónde encontrar y cómo cargar los dashboards al iniciar.
+- `grafana-deployment.yaml`: se actualizó para incluir estos recursos como volúmenes montados.
+
+Todo esto está referenciado en `kustomization.yaml` para que sea desplegado automáticamente con Argo CD.
+
+### 📊 Dashboard Automático
+
+Una vez desplegado, el dashboard incluye las siguientes métricas clave:
+
+| Métrica                         | Descripción                                      |
+|-------------------------------|--------------------------------------------------|
+| `inference_requests_total`     | Número total de inferencias realizadas.         |
+| `inference_request_latency_seconds` | Latencia promedio de las inferencias.     |
+| `process_virtual_memory_bytes` | Memoria usada por el servicio FastAPI.          |
+
+### 🎯 Visualización en Grafana
+
+El dashboard generado luce así:
+
+![image](https://github.com/user-attachments/assets/abc5661f-76da-4438-8285-af46280da50c)
+
+
+> *Grafana toma automáticamente estas configuraciones desde el `ConfigMap`, sin intervención manual después del despliegue.*
+
+---
+
+Esto garantiza que cada vez que se despliega el stack con Argo CD, el dashboard esté disponible de forma inmediata para monitorear la API de inferencia.
+
+
+
+
