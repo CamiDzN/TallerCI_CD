@@ -5,6 +5,9 @@ Este proyecto implementa un flujo de **despliegue continuo (CI/CD)** con enfoque
 
 ## 🧱 Componentes Principales
 
+![image](https://github.com/user-attachments/assets/0e76efff-9e6e-425a-99fa-b28779e518d3)
+
+
 | Componente         | Función                                                    |
 |--------------------|------------------------------------------------------------|
 | **FastAPI**        | API de inferencia con modelo ML (Random Forest)            |
